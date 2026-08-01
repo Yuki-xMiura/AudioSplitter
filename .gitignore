@@ -1,0 +1,32 @@
+# 1. Ambientes Virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# 2. Variáveis de Ambiente e Segredos
+.env
+*.pem
+*.key
+
+# 3. Cache do Python e arquivos compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 4. Arquivos de áudio gerados e pastas de saída do script
+capitulos/
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.flac
+
+# 5. Configurações de Editores / IDEs
+.vscode/
+.idea/
+*.swp
+
+# 6. Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
