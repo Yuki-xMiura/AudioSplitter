@@ -8,7 +8,7 @@ O projeto utiliza a API do **Google Gemini** para escutar o áudio, identificar 
 
 ## Funcionalidades
 
-- **Análise Inteligente por IA:** Transcrição e identificação temática de tópicos a cada intervalo configurável (padrão: 5 minutos).
+- **Análise Inteligente por IA:** Transcrição e identificação temática de tópicos a cada intervalo configurável (padrão: entre 3 a 6 minutos).
 - **Tags ID3 Nativas:** Injeção de metadados de mídia em cada capítulo gerado para exibição do título em qualquer player de áudio/carro.
 - **Structured Output JSON:** Comunicação precisa e sem ambiguidades com a API do Gemini.
 - **Autolimpeza:** Remoção automática do arquivo temporário enviado para a API após o processamento.
