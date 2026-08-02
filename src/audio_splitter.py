@@ -19,14 +19,14 @@ def split_audio(file_path: str, segments: list[dict], output_dir: str = "output"
     audio = AudioSegment.from_file(file_path)
     
     for idx, seg in enumerate(segments, start=1):
-        start_ms = parse_time_to_ms(seg["inicio"])
-        end_ms = parse_time_to_ms(seg["fim"])
+        start_ms = parse_time_to_ms(seg["start_time"])
+        end_ms = parse_time_to_ms(seg["end_time"])
         
         # Garante que o fim não ultrapasse a duração total do áudio
         end_ms = min(end_ms, len(audio))
         
         chunk = audio[start_ms:end_ms]
-        title = seg["titulo"].strip()
+        title = seg["title"].strip()
         
         # Nome do arquivo limpo para evitar caracteres inválidos no sistema de arquivos
         safe_title = "".join([c for c in title if c.isalnum() or c in (' ', '_', '-')]).rstrip()
