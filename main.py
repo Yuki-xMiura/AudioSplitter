@@ -9,8 +9,8 @@ load_dotenv()
 def main():
     parser = argparse.ArgumentParser(description="Segmente e fatie audiobooks com IA.")
     parser.add_argument("audio_path", type=str, help="Caminho do arquivo de áudio (MP3, M4A, etc.)")
-    parser.add_argument("--min", type=int, default=3, help="Duração mínima de cada bloco em minutos (padrão: 1)")
-    parser.add_argument("--max", type=int, default=6, help="Duração máxima de cada bloco em minutos (padrão: 10)")
+    parser.add_argument("--min", type=int, default=3, help="Duração mínima de cada bloco em minutos (padrão: 3)")
+    parser.add_argument("--max", type=int, default=6, help="Duração máxima de cada bloco em minutos (padrão: 6)")
     parser.add_argument("--out", type=str, default="capitulos", help="Pasta de saída para os MP3s")
     
     args = parser.parse_args()

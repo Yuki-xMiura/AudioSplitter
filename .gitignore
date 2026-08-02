@@ -30,3 +30,5 @@ capitulos/
 # 6. Arquivos de sistema operacional
 .DS_Store
 Thumbs.db
+
+able_models.py

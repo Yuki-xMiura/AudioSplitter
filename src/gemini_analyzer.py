@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from google import genai
 from google.genai import types
 
@@ -9,6 +10,29 @@ def analyze_audio(file_path: str, max_minutes: int = 6, min_minutes: int = 3) ->
     
     print(f"Uploading '{file_path}' para o Gemini File API...")
     audio_file = client.files.upload(file=file_path)
+
+# Define o mime_type correto para áudio MP3/MPEG
+    # Para arquivos de áudio .mp3 ou .mpeg, use 'audio/mp3' ou 'audio/mpeg'
+    mime_type = "audio/mp3" if audio_path.lower().endswith((".mp3", ".mpeg")) else None
+
+    # Upload especificando o tipo MIME explícito
+    if mime_type:
+        audio_file = client.files.upload(file=audio_path, config={"mime_type": mime_type})
+    else:
+        audio_file = client.files.upload(file=audio_path)
+
+    print(f"Arquivo enviado com ID: {audio_file.name}. Aguardando processamento...")
+
+    while audio_file.state.name == "PROCESSING":
+        print(".", end="", flush=True)
+        time.sleep(2)
+        # Atualiza o status do arquivo na API
+        audio_file = client.files.get(name=audio_file.name)
+
+    if audio_file.state.name == "FAILED":
+        raise ValueError("O processamento do arquivo de áudio falhou no Gemini File API.")
+
+    print("\nÁudio pronto! Processando análise de tópicos com Gemini...")
     
     prompt = f"""
     Analise este arquivo de áudio e divida-o em blocos entre aproximadamente {min_minutes} e {max_minutes} minutos.
@@ -23,7 +47,7 @@ def analyze_audio(file_path: str, max_minutes: int = 6, min_minutes: int = 3) ->
     
     print("Processando análise de tópicos com Gemini...")
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.1-flash-lite",
         contents=[audio_file, prompt],
         config=types.GenerateContentConfig(
             response_mime_type="application/json"
