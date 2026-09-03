@@ -16,6 +16,7 @@ __pycache__/
 
 # 4. Arquivos de áudio gerados e pastas de saída do script
 capitulos/
+EBD/
 *.mp3
 *.wav
 *.m4a
